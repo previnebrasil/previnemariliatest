@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #F9F9F9;
+      font-family: "Arial", sans-serif;
+    }
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.textbox {
+  position: absolute;
+  text-align: justify;
+  top: 172px;
+  right: 180px;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 3px;
+  width: 700px;
+}
+
+.textbox p {
+  font-weight: normal;
+  margin-top: 0;
+}
+
+.textbox u {
+  font-weight: bold;
+  color: red;
+}
+
+.confirm-button {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.legend {
+  margin-top: 0;
+  text-align: center;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #003A70, #001529);
+  color: #333333;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+label {
+  font-size: 18px;
+  color: #333333;
+  margin-right: 10px;
+
+}
+
+select {
+  font-size: 16px;
+  color: #333333;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #F5F5F5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+select:hover {
+      background-color: #E0E0E0;
+}
+
+.planilha {
+  width: 100%;
+  height: 800px;
+  border: none;
+
+}
+.legenda {
+  font-size: 14px;
+}
+
+.legenda-item:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  margin-right: 5px;
+  border-radius: 20%;
+  vertical-align: middle;
+}
+
+.legenda-item.amarelo:before {
+  background-color: yellow;
+}
+
+.legenda-item.azul:before {
+  background-color: #00B0F0;
+}
+
+.legenda-item.verde:before {
+  background-color: #92D050;
+}
+
+.legenda-item.laranja:before {
+  background-color: #FFC000;
+}
+
+.legenda-item.vermelho:before {
+  background-color: red;
+}
+
+.legenda-item.roxo:before {
+  background-color: #CC66FF;
+}
+
+.legenda-item.cinza:before {
+  background-color: #D8D8D8;
+}
+
+
+   #links-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title {
+      text-align: left;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .select-container {
+      display: flex;
+      justify-content: center;
+
+    }
+
+  .footer {
+    position: center;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+   /* Estilos para responsividade (mídia móvel) */
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            nav {
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .search {
+                margin-top: 10px;
+            }
+        }
+  </style>
+  <script>
+  function closeWindow() {
+  var textbox = document.getElementById("textbox");
+  textbox.style.display = "none";
+}
+
+window.onload = function() {
+  var confirmButton = document.getElementById("confirm-button");
+  confirmButton.addEventListener("click", closeWindow);
+}
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.text-animate').textillate({
+        in: { effect: 'fadeIn', shuffle: true },
+        out: { effect: 'fadeOut', shuffle: true },
+        loop: true
+      });
+    });
+function changeSpreadsheet(quarter, unit) {
+  var spreadsheet = document.getElementById("spreadsheet");
+  var url = "";
+
+  if (quarter === "Q1 2023") {
+    if (unit === "PENITENCIARIA") {
+      url = "https://";
+     } else if (unit === "USF AEROPORTO") {
+      url = "https://docs.google.com/spreadsheets/d/1Ilw-aFJFP5UWijoUemFrZpKydIdR0BHl/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF ALTANEIRA") {
+      url = "https://docs.google.com/spreadsheets/d/1EEVIBUB3WXOV32mKcYVvZg3GqoGkuOth/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF ANIZ BADRA") {
+      url = "https://docs.google.com/spreadsheets/d/1xLVBGvO9x2Vj98aIsmk2ZNx2W9tlTLVg/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF ARGOLO FERRAO") {
+      url = "https://docs.google.com/spreadsheets/d/1Zx95QXA3U7tZpkrSZQLDVkdpbGyOr4nZ/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF AVENCAS AMADEU AMARAL") {
+      url = "https://docs.google.com/spreadsheets/d/1umsjougfP5rZZI9myQ4xCBnxWxPHuFL4/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF BANDEIRANTES") {
+      url = "https://docs.google.com/spreadsheets/d/1JiNd86JW7k9XLgU2iY9Q8QH_EGnodXWd/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF CAMPO BELO") {
+      url = "https://docs.google.com/spreadsheets/d/1rBoIvSL3Ff1jKPqza1fPNn7M20w7TbHv/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF CDHU") {
+      url = "https://docs.google.com/spreadsheets/d/1yVAHAhvldgt43_xATx_7EEYWNhj9DwuX/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF COSTA E SILVA") {
+      url = "https://docs.google.com/spreadsheets/d/1M2sAdIL_B0Ns-7mxdKlTQaAU3qo4GsFM/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF FIGUERINHA") {
+      url = "https://docs.google.com/spreadsheets/d/1bpWI3qaK-neItGvExS5lOZcYZIgSGDRi/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JANIO QUADROS") {
+      url = "https://docs.google.com/spreadsheets/d/13uGpRDtES-A5w_BrTksB7cn-p4RLgfIN/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM AMERICA IV") {
+      url = "https://docs.google.com/spreadsheets/d/1pelprRSyX2r-utG8tTE1pXUtRxNYF6mA/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM CAVALARI") {
+      url = "https://docs.google.com/spreadsheets/d/1tYTx_XC-Ywd7hpuDfIughgT_jK4NVfuO/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM FLAMINGO") {
+      url = "https://docs.google.com/spreadsheets/d/1WBQXH7Zo0tCOtnQIBJrIPW751AUjeXPB/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM MARILIA") {
+      url = "https://docs.google.com/spreadsheets/d/1950TLAUMOLeo5ZInx1s5JE_-v8bRfuQv/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM MARACA") {
+      url = "https://docs.google.com/spreadsheets/d/1UFmuRB5xxsU2f118afw7kqmhE9sTEKPz/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM RENATA") {
+      url = "https://docs.google.com/spreadsheets/d/1fJG0HN_YhK6eqHsz09Q3Km-8WSV879D3/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM TERUEL") {
+      url = "https://docs.google.com/spreadsheets/d/1_V4oeFFF47dWWXdwYrVNgFe377TANmYb/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF JK") {
+      url = "https://docs.google.com/spreadsheets/d/1zh3m9vRpTo-PrqJhU1DzaW7g1XKURiqZ/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JOQUEY CLUBE (CONSULTORIO NA RUA)") {
+      url = "https://docs.google.com/spreadsheets/d/18L0IniPnWvZsDm0RCWZImgkP4YSt9yRC/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JOQUEY CLUBE") {
+      url = "https://docs.google.com/spreadsheets/d/1UA7UXb3hVyn-04YOM_ifZkTaHVQpGJZS/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JULIETA") {
+      url = "https://docs.google.com/spreadsheets/d/1oeA_jv3ZPV9ac8PtVkYW9GPevEHd6wBd/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF LACIO") {
+      url = "https://docs.google.com/spreadsheets/d/167OY_sxjLcVLv8fAa9PIjEdebkVKkBVx/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";    
+    } else if (unit === "USF LILIANA") {
+      url = "https://docs.google.com/spreadsheets/d/1A-PPvgq89jlheLdqbwbdjsWwernwgiKu/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF MARAJO") {
+      url = "https://docs.google.com/spreadsheets/d/1g0MDENmujlKM-SgLmH1ZQd99ZjmNHaRS/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF NOVO HORIZONTE") {
+      url = "https://docs.google.com/spreadsheets/d/19fIJraalqaES0_5tV0Qvfz59rJqKeuV2/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PADRE NOBREGA") {
+      url = "https://docs.google.com/spreadsheets/d/1OL-1DV0fXWWip3OTUSta5oyqTWUOfgxm/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PADRE NOBREGA II") {
+      url = "https://docs.google.com/spreadsheets/d/1G4pFjmbh9j4jBMLqxt6_hu6wfVcwTy5i/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PALMITAL") {
+      url = "https://docs.google.com/spreadsheets/d/1Sqm4h5AnOnpS_4vPgAGeonr-NXO8XTzJ/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PARQUE DAS NACOES") {
+      url = "https://docs.google.com/spreadsheets/d/1n7CBUI8vFiuWQO9F9tgLqvc6ObvOfjf3/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PARQUE DOS IPES") {
+      url = "https://docs.google.com/spreadsheets/d/1ySmEk9kx9ts6ildPlXeynLnfHTWjrde4/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PRIMEIRO DE MAIO") {
+      url = "https://docs.google.com/spreadsheets/d/16hK4S7INYYSCrbTCrySHbQannfEnAUkO/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF ROSALIA") {
+      url = "https://docs.google.com/spreadsheets/d/15Yrg_Rg7uyeVJiSXIUZ-RpfijBUNryb-/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA ANTONIETA II") {
+      url = "https://docs.google.com/spreadsheets/d/1BBWoSC_zdEFZQIJ_h4x-AfYyUKnmztmZ/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA ANTONIETA III") {
+      url = "https://docs.google.com/spreadsheets/d/1o6zh6kSbjBe_ahfwwk7Kid1DZD6mbMPF/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA AUGUSTA") {
+      url = "https://docs.google.com/spreadsheets/d/1XIoCMiJXZ2HGGfCksbMu-x_1Neou0bya/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA PAULA") {
+      url = "https://docs.google.com/spreadsheets/d/1b0VUY391dn1-ZGMUTH__6bbLB_AewQXW/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SAO MIGUEL") {
+      url = "https://docs.google.com/spreadsheets/d/1IwePCIPvy6M5noGgnVRc-7ABn7Iu_n24/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF TOFOLI") {
+      url = "https://docs.google.com/spreadsheets/d/15MXfVtMvYJbPMIW5XQ2JcCfnf5kwfg08/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF TRES LAGOS") {
+      url = "https://docs.google.com/spreadsheets/d/18GdqVHlgKJCR6KpB74ViUup_8rhs4R99/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VIDA NOVA MARACA") {
+      url = "https://docs.google.com/spreadsheets/d/1sHbAFbPb85jU6e8bNn5f350Fyn8JPh_4/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA HIPICA") {
+      url = "https://docs.google.com/spreadsheets/d/1ahjFJoB58bYZXJ8_hmZG-SKJjBc3CW16/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA NOVA") {
+      url = "https://docs.google.com/spreadsheets/d/1XY2JqpSgs5pnybx0r7x-mah0rJewML6D/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA BARROS") {
+      url = "https://docs.google.com/spreadsheets/d/13Jwix1USBIj8Rs6tWkbojUo3slB6UiQ9/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA REAL") {
+      url = "https://docs.google.com/spreadsheets/d/1OgFCakQi7efvkzzGhMXFBNBVjTeFcRz7/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } 
+// Incluir outras unidades Q1 2023
+ } else if (quarter === "Q2 2023") {
+    if (unit === "PENITENCIARIA") {
+      url = "https://docs.google.com/spreadsheets/d/10m65HlFsQSi9R8wA7hO8JOaPJxh99iTr/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF AEROPORTO") {
+      url = "https://docs.google.com/spreadsheets/d/1k7tzFopDo-Up7FPYVCNoKn9MU-PFwpWe/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF ALTANEIRA") {
+      url = "https://docs.google.com/spreadsheets/d/1hszUhsKbRXCWV6TmjKgcTMLcq9IMUsX4/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF ANIZ BADRA") {
+      url = "https://docs.google.com/spreadsheets/d/1pEoKQ4OUoq_R_vY9gbPmr-uVqqKlM1Ef/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF ARGOLO FERRAO") {
+      url = "https://docs.google.com/spreadsheets/d/11xhsxZFnNi8-hs-_ixNrujUckgPQtaJ0/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF AVENCAS AMADEU AMARAL") {
+      url = "https://docs.google.com/spreadsheets/d/19EqCVEMBOIA8E7aQbuQKyOSikrLVE9zV/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF BANDEIRANTES") {
+      url = "https://docs.google.com/spreadsheets/d/1ZLWC2u58VqC9M1kfT53IDfu-KZlnzyuE/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF CAMPO BELO") {
+      url = "https://docs.google.com/spreadsheets/d/19En3ao8wu0N9OE_uzV3UvBF4c9uZkNYz/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF CDHU") {
+      url = "https://docs.google.com/spreadsheets/d/1CSbUgQ76q7Zg3djxHDYIQvBCl2GZrSko/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF COSTA E SILVA") {
+      url = "https://docs.google.com/spreadsheets/d/1EmU5q0GCH6E1xCAQnMiSsGQZ9DGEgaUs/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF FIGUERINHA") {
+      url = "https://docs.google.com/spreadsheets/d/1sXpSnGR27hKYVK_NL7AYl3DVEUr0bWdd/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JANIO QUADROS") {
+      url = "https://docs.google.com/spreadsheets/d/1JS-y5edvtrlOHD3eZTs0ssPH3xFSThhP/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM AMERICA IV") {
+      url = "https://docs.google.com/spreadsheets/d/1-lTpU4tyPgyJPeTyKaJmL1hOcwKQ6xFq/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM CAVALARI") {
+      url = "https://docs.google.com/spreadsheets/d/1D41kDpvz1Ch6eqjBu3inCdSJE7nQCf-Q/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM FLAMINGO") {
+      url = "https://docs.google.com/spreadsheets/d/1MBHf5yZ1sY4Xi-kst59X0phMhyPd5cN7/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM MARILIA") {
+      url = "https://docs.google.com/spreadsheets/d/1d9FanoYAT34XlRbuzk8SfB5hPi05TLRf/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM MARACA") {
+      url = "https://docs.google.com/spreadsheets/d/1YC93ohilQdtRaXvVct086TEqEfhToHdQ/edit?usp=drive_link&ouid=108770564777642067402&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM RENATA") {
+      url = "https://docs.google.com/spreadsheets/d/1hpcXcFCRKwWwlejslMeO1iUipVdwPQ53/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JARDIM TERUEL") {
+      url = "https://docs.google.com/spreadsheets/d/1h59dqy6pUhbRCldhNfbsMFOg3M1JpbXZ/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF JK") {
+      url = "https://docs.google.com/spreadsheets/d/13J8Q6kRkizNF_nU1-oFvcU1LkTNDfYqE/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JOQUEY CLUBE (CONSULTORIO NA RUA)") {
+      url = "https://docs.google.com/spreadsheets/d/1a_J0lXfLr3dE1qbbCaMBimaGX_9y4fdj/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JOQUEY CLUBE") {
+      url = "https://docs.google.com/spreadsheets/d/1t_KABmR4h390G_HKlYHi7Y65i4Q6Xmx_/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF JULIETA") {
+      url = "https://docs.google.com/spreadsheets/d/10_8W-vVGuUfVTjViCYS1tiSykAQn2U2T/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF LACIO") {
+      url = "https://docs.google.com/spreadsheets/d/1yf1a__mK5EbYvSBR1BOnmXFyriCYMSMq/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";    
+    } else if (unit === "USF LILIANA") {
+      url = "https://docs.google.com/spreadsheets/d/1O3m3aLSmox1YVjmRR7ab6fpsmx4D9d_J/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF MARAJO") {
+      url = "https://docs.google.com/spreadsheets/d/1s5y5_1Xev-l_lWStsKyrgyUp1eDMwDub/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF NOVO HORIZONTE") {
+      url = "https://docs.google.com/spreadsheets/d/1b6t6Y6QVjwRc5EYfwdNhc_Wwk2m4YaG3/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PADRE NOBREGA") {
+      url = "https://docs.google.com/spreadsheets/d/15bsoqx142OAIzWj7RVB6t_YLbldPHn4T/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PADRE NOBREGA II") {
+      url = "https://docs.google.com/spreadsheets/d/1B8A2dcKnjeG-FlqfwNv2YVkozTaZ_wwG/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PALMITAL") {
+      url = "https://docs.google.com/spreadsheets/d/1ngbucTSJA-Yg6M_GuUo6QsAMszVIngHx/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PARQUE DAS NACOES") {
+      url = "https://docs.google.com/spreadsheets/d/16v8Ckgdl3ZSxdur0zXgU7H2CLg7AHUPA/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PARQUE DOS IPES") {
+      url = "https://docs.google.com/spreadsheets/d/1OnfkQfmf8eUYozMLUcsRcNZFY_Yoasnh/edit?usp=drive_link&ouid=116954640307459437331&rtpof=true&sd=true";
+    } else if (unit === "USF PRIMEIRO DE MAIO") {
+      url = "https://docs.google.com/spreadsheets/d/1iPHl5kvhb_-0yFjTFF5daQQFyeF11LB3/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF ROSALIA") {
+      url = "https://docs.google.com/spreadsheets/d/1gJkxTDV53bCRO6dKmAak5njR37Pkp3FT/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA ANTONIETA II") {
+      url = "https://docs.google.com/spreadsheets/d/1sQavG03q_8s0EIHdm8Sh-bH_wgUjt0cR/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA ANTONIETA III") {
+      url = "https://docs.google.com/spreadsheets/d/1NYqlmHPqD0NTw0FNBiXvxx7o95jGlYJH/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA AUGUSTA") {
+      url = "https://docs.google.com/spreadsheets/d/1GFgWOMtVkSMtxkPo4mt-XpzsA6iQXvh8/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SANTA PAULA") {
+      url = "https://docs.google.com/spreadsheets/d/1O0uBGcyE35cBg5XLik_cT2xWK95bovJE/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF SAO MIGUEL") {
+      url = "https://docs.google.com/spreadsheets/d/164AVXIsnJZABUP8Kz4NtZaw0BpNUUZvE/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF TOFOLI") {
+      url = "https://docs.google.com/spreadsheets/d/1UikvDdF4nsWcJG9vnhwj4Xy80Oel2gwx/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF TRES LAGOS") {
+      url = "https://docs.google.com/spreadsheets/d/1OTXeVV4uwofEYI5ty9d3nHOgmJwEvg8Z/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VIDA NOVA MARACA") {
+      url = "https://docs.google.com/spreadsheets/d/1ojj4TEPfA5Mf_pqraHhnLCE2m9-tW3E4/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA HIPICA") {
+      url = "https://docs.google.com/spreadsheets/d/1yhiuXl6x8pJwJA_oGY1UUJX2oP1zDHB-/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA NOVA") {
+      url = "https://docs.google.com/spreadsheets/d/1hAy_4YVHuLjcuVHhkHALLWA0gspm6HAg/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA BARROS") {
+      url = "https://docs.google.com/spreadsheets/d/1CqcRQT1S-Crc9YqGwsgSaU7zwIREsY7K/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } else if (unit === "USF VILA REAL") {
+      url = "https://docs.google.com/spreadsheets/d/1utG8zFEpSU9MBpNGQmkDQ-nxhLNM5Ghz/edit?usp=drive_link&ouid=102749051930997160303&rtpof=true&sd=true";
+    } 
+    // Add other units for Q2 2023 here
+  } else if (quarter === "Q3 2023") {
+    if (unit === "PENITENCIARIA") {
+      url = "https://docs.google.com/spreadsheets/d/Q3_2023_PENITENCIARIA_spreadsheet_url";
+    } else if (unit === "USF ALTANEIRA") {
+      url = "https://docs.google.com/spreadsheets/d/Q3_2023_USF_ALTANEIRA_spreadsheet_url";
+    }
+    // Add other units for Q3 2023 here
+  }
+
+spreadsheet.src = url;
+}
+</script>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-animate">População Vinculada na APS</h1>
+    </div>
+<div class="container">
+<div>
+    <label for="quadrimestre">Quadrimestre:</label>
+    <select id="quadrimestre" onchange="changeSpreadsheet(this.value, document.getElementById('unidade').value)">
+      <option value="">Selecione</option>
+      <option value="Q1 2023">Q1 2023</option>
+      <option value="Q2 2023">Q2 2023</option>
+      <option value="Q3 2023">Q3 2023</option>
+    </select>
+  
+  <div class="legend">
+  </div>
+  <div>
+    <label for="unidade">Unidade:</label>
+    <select id="unidade" onchange="changeSpreadsheet(document.getElementById('quadrimestre').value, this.value)">
+      <option value="">Selecione</option>
+      <option value="PENITENCIARIA">PENITENCIARIA</option>
+      <option value="USF AEROPORTO">USF AEROPORTO</option>	
+      <option value="USF ALTANEIRA">USF ALTANEIRA</option>      
+      <option value="USF ANIZ BADRA">USF ANIZ BADRA</option>
+      <option value="USF ARGOLO FERRAO">USF ARGOLO FERRAO</option>
+      <option value="USF AVENCAS AMADEU AMARAL">USF AVENCAS AMADEU AMARAL</option>
+        <option value="USF BANDEIRANTES">USF BANDEIRANTES</option>
+        <option value="USF CAMPO BELO">USF CAMPO BELO</option>
+        <option value="USF CDHU">USF CDHU</option>
+        <option value="USF COSTA E SILVA">USF COSTA E SILVA</option>
+        <option value="USF FIGUERINHA">USF FIGUERINHA</option>
+        <option value="USF JANIO QUADROS">USF JANIO QUADROS</option>
+        <option value="USF JARDIM AMERICA IV">USF JARDIM AMERICA IV</option>
+        <option value="USF JARDIM CAVALARI">USF JARDIM CAVALARI</option>
+        <option value="USF JARDIM FLAMINGO">USF JARDIM FLAMINGO</option>
+        <option value="USF JARDIM MARACA">USF JARDIM MARACA</option>
+        <option value="USF JARDIM MARILIA">USF JARDIM MARILIA</option>
+        <option value="USF JARDIM RENATA">USF JARDIM RENATA</option>
+        <option value="USF JARDIM TERUEL">USF JARDIM TERUEL</option>
+        <option value="USF JK">USF JK</option>
+        <option value="USF JOQUEY CLUBE">USF JOQUEY CLUBE</option>
+        <option value="USF JOQUEY CLUBE (CONSULTORIO NA RUA)">USF JOQUEY CLUBE (CONSULTORIO NA RUA)</option>
+        <option value="USF JULIETA">USF JULIETA</option>
+        <option value="USF LACIO">USF LACIO</option>
+        <option value="USF LILIANA">USF LILIANA</option>
+        <option value="USF MARAJO">USF MARAJO</option>
+        <option value="USF NOVO HORIZONTE">USF NOVO HORIZONTE</option>
+        <option value="USF PADRE NOBREGA">USF PADRE NOBREGA</option>
+        <option value="USF PADRE NOBREGA II">USF PADRE NOBREGA II</option>
+        <option value="USF PALMITAL">USF PALMITAL</option>
+        <option value="USF PARQUE DAS NACOES">USF PARQUE DAS NACOES</option>
+        <option value="USF PARQUE DOS IPES">USF PARQUE DOS IPES</option>
+        <option value="USF PRIMEIRO DE MAIO">USF PRIMEIRO DE MAIO</option>
+        <option value="USF ROSALIA">USF ROSALIA</option>
+        <option value="USF SANTA ANTONIETA II">USF SANTA ANTONIETA II</option>
+        <option value="USF SANTA ANTONIETA III">USF SANTA ANTONIETA III</option>
+        <option value="USF SANTA AUGUSTA">USF SANTA AUGUSTA</option>
+        <option value="USF SANTA PAULA">USF SANTA PAULA</option>
+        <option value="USF SAO MIGUEL">USF SAO MIGUEL</option>
+        <option value="USF TOFOLI">USF TOFOLI</option>
+        <option value="USF TRES LAGOS">USF TRES LAGOS</option>
+        <option value="USF VIDA NOVA MARACA">USF VIDA NOVA MARACA</option>
+        <option value="USF VILA BARROS">USF VILA BARROS</option>
+        <option value="USF VILA HIPICA">USF VILA HIPICA</option>
+        <option value="USF VILA NOVA">USF VILA NOVA</option>
+        <option value="USF VILA REAL">USF VILA REAL</option>
+      </select>
+<div class="legenda">
+  <span class="amarelo legenda-item"></span> HIPERTENSO<br>
+  <span class="azul legenda-item"></span> DIABETICO<br>
+  <span class="vermelho legenda-item"></span> HIPERTENSO + DIABETICO<br>
+  <span class="verde legenda-item"></span> MULHER DE 25 A 64 ANOS<br>
+  <span class="laranja legenda-item"></span> MULHER HIPERTENSA DE 25 A 64 ANOS<br>
+   <span class="roxo legenda-item"></span> MULHER DIABETICA DE 25 A 64 ANOS<br>
+  <span class="cinza legenda-item"></span> MULHER HIPERTENSA E DIABETICA DE 25 A 64 ANOS<br>
+</div>
+   </div>
+    <br> <!-- Linha em branco -->
+    <iframe id="spreadsheet" class="planilha" src="" frameborder="0"></iframe>
+    </div>
+
+      </select>
+    </div>
+  </div>
+
+  </script>
+
+</body>
+</html>
+
+
+
