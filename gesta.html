@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestação à encerrar</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F9F9F9;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .select-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .select-container label,
+        .select-container select {
+            margin-right: 50px;
+        }
+
+        .image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #003A70, #001529);
+            color: #333333;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        label {
+            font-size: 18px;
+            color: #333333;
+            margin-right: 10px;
+        }
+
+        select {
+            font-size: 16px;
+            color: #333333;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            background-color: #F5F5F5;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        select:hover {
+            background-color: #E0E0E0;
+        }
+
+        #csvContent {
+            max-height: 500px;
+            overflow-y: auto;
+            margin: 20px 20px 20px auto;
+            padding: 10px
+        }
+
+        #downloadButton {
+            display: none;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            nav {
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-animate">Gestação à encerrar</h1>
+        <div class="select-container"></div>
+        <label for="indicadorSelect">Condição:</label>
+        <select id="indicadorSelect">
+            <option value="Selecione">Selecione</option>
+            <option value="gesta">Gestação à encerrar</option>
+        </select>
+        <label for="unidadeSelect">Unidade:</label>
+        <select id="unidadeSelect">
+            <option value="">Selecione</option>
+            <option value="EAP CHICO MENDES">EAP CHICO MENDES</option>
+            <option value="EAP PLANALTO">EAP PLANALTO</option>
+            <option value="EAP SANTA ANTONIETA">EAP SANTA ANTONIETA</option>
+            <option value="EAP SAO JUDAS">EAP SAO JUDAS</option>
+            <option value="AEROPORTO">USF AEROPORTO</option>
+            <option value="ALTANEIRA">USF ALTANEIRA</option>
+            <option value="ANIZ BADRA">USF ANIZ BADRA</option>
+            <option value="ARGOLO FERRAO">USF ARGOLO FERRAO</option>
+            <option value="AVENCAS/ AMADEU AMARAL">USF AVENCAS AMADEU AMARAL</option>
+            <option value="USF BANDEIRANTES">USF BANDEIRANTES</option>
+            <option value="BANDEIRANTES II">USF BANDEIRANTES II</option>
+            <option value="USF CAMPO BELO">USF CAMPO BELO</option>
+            <option value="CDHU">USF CDHU</option>
+            <option value="USF COSTA E SILVA">USF COSTA E SILVA</option>
+            <option value="COSTA E SILVA II">USF COSTA E SILVA II</option>
+            <option value="FIGUERINHA">USF FIGUERINHA</option>
+            <option value="JANIO QUADROS">USF JANIO QUADROS</option>
+            <option value="JARDIM AMERICA IV">USF JARDIM AMERICA IV</option>
+            <option value="JARDIM CAVALARI">USF JARDIM CAVALARI</option>
+            <option value="JARDIM FLAMINGO">USF JARDIM FLAMINGO</option>
+            <option value="JARDIM MARACA">USF JARDIM MARACA</option>
+            <option value="JARDIM MARACA II">USF JARDIM MARACA II</option>
+            <option value="JARDIM MARILIA">USF JARDIM MARILIA</option>
+            <option value="JARDIM RENATA">USF JARDIM RENATA</option>
+            <option value="JARDIM TERUEL">USF JARDIM TERUEL</option>
+            <option value="USF JK">USF JK</option>
+            <option value="JK II">USF JK II</option>
+            <option value="JOQUEY CLUBE">USF JOQUEY CLUBE</option>
+            <option value="JULIETA">USF JULIETA</option>
+            <option value="LACIO">USF LACIO</option>
+            <option value="LILIANA">USF LILIANA</option>
+            <option value="MARAJO">USF MARAJO</option>
+            <option value="NOVO HORIZONTE">USF NOVO HORIZONTE</option>
+            <option value="PADRE NOBREGA">USF PADRE NOBREGA</option>
+            <option value="PADRE NOBREGA II">USF PADRE NOBREGA II</option>
+            <option value="PALMITAL">USF PALMITAL</option>
+            <option value="PARQUE DAS NACOES">USF PARQUE DAS NACOES</option>
+            <option value="PARQUE DOS IPES">USF PARQUE DOS IPES</option>
+            <option value="PRIMEIRO DE MAIO">USF PRIMEIRO DE MAIO</option>
+            <option value="ROSALIA">USF ROSALIA</option>
+            <option value="SANTA ANTONIETA II">USF SANTA ANTONIETA II</option>
+            <option value="SANTA ANTONIETA III">USF SANTA ANTONIETA III</option>
+            <option value="SANTA AUGUSTA">USF SANTA AUGUSTA</option>
+            <option value="SANTA PAULA">USF SANTA PAULA</option>
+            <option value="USF SAO MIGUEL">USF SAO MIGUEL</option>
+            <option value="SAO MIGUEL II">USF SAO MIGUEL II</option>
+            <option value="TOFOLI">USF TOFOLI</option>
+            <option value="TRES LAGOS">USF TRES LAGOS</option>
+            <option value="VIDA NOVA MARACA">USF VIDA NOVA MARACA</option>
+            <option value="VILA BARROS">USF VILA BARROS</option>
+            <option value="VILA HIPICA">USF VILA HIPICA</option>
+            <option value="VILA NOVA">USF VILA NOVA</option>
+            <option value="VILA REAL">USF VILA REAL</option>
+            <option value="SEM EQUIPE">SEM EQUIPE</option>
+        </select>
+        <!-- Adicione outras opções conforme necessário -->
+        <button id="downloadButton">Baixar</button>
+    </div>
+    <div id="csvContent"></div>
+    <script>
+        function formatTable(data, unidade) {
+            var lines = data.split("\n");
+            var htmlContent = '<table>';
+            var headerLine = lines[0].split(",");
+            var equipeColumnIndex = headerLine.length - 1; // Assume que 'EQUIPE' é a última coluna
+            var hasData = false;
+            htmlContent += '<tr>';
+            for (var i = 0; i < headerLine.length; i++) {
+                htmlContent += '<th>' + headerLine[i] + '</th>';
+            }
+            htmlContent += '</tr>';
+            var csvData = []; // Para armazenar os dados CSV
+            for (var R = 1; R < lines.length; R++) {
+                var line = lines[R].split(",");
+                if (line.length <= equipeColumnIndex) continue; // Verifica se a linha possui o índice da coluna EQUIPE
+                var equipeValue = line[equipeColumnIndex].trim();
+                if (equipeValue === unidade) {
+                    hasData = true;
+                    htmlContent += '<tr>';
+                    var rowData = [];
+                    for (var C = 0; C < line.length; C++) {
+                        htmlContent += '<td>' + line[C] + '</td>';
+                        rowData.push(line[C]);
+                    }
+                    csvData.push(rowData.join(',')); // Adiciona linha CSV
+                    htmlContent += '</tr>';
+                }
+            }
+            htmlContent += '</table>';
+            if (!hasData) {
+                htmlContent = '<p>Não existem dados para essa condição.</p>';
+            }
+            return { html: htmlContent, csv: csvData.join('\n') };
+        }
+
+        function loadFile(indicador, unidade) {
+            if (indicador === 'Selecione' || unidade === 'Selecione') {
+                document.getElementById('csvContent').innerHTML = ''; // Limpar a tabela se a seleção for inválida
+                document.getElementById('downloadButton').style.display = 'none'; // Oculta o botão de download
+                return;
+            }
+            var filePath = indicador + '.csv';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', filePath, true);
+            xhr.onload = function (e) {
+                var data = xhr.responseText;
+                var formattedData = formatTable(data, unidade);
+                document.getElementById('csvContent').innerHTML = formattedData.html;
+
+                // Ativa o botão de download
+                var downloadButton = document.getElementById('downloadButton');
+                downloadButton.style.display = 'block';
+                downloadButton.onclick = function () {
+                    var csvContent = formattedData.csv;
+                    var blob = new Blob([csvContent], { type: 'text/csv' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = 'dados.csv';
+                    link.click();
+                };
+            };
+            xhr.send();
+        }
+
+        document.getElementById('indicadorSelect').addEventListener('change', function () {
+            var indicador = this.value;
+            var unidade = document.getElementById('unidadeSelect').value;
+            loadFile(indicador, unidade);
+        });
+        document.getElementById('unidadeSelect').addEventListener('change', function () {
+            var indicador = document.getElementById('indicadorSelect').value;
+            var unidade = this.value;
+            loadFile(indicador, unidade);
+        });
+    </script>
+</body>
+
+</html>

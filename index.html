@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Previne Marília</title>
+	<link rel="icon" type="image/png" href="logo.png">
+	<style>
+	/* Estilos gerais */
+	
+	body {
+		font-family: Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+	/* Estilos para o cabeçalho */
+	
+	header {
+		background-color: #315b97;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		/* Alterado para empilhar os elementos verticalmente */
+		align-items: center;
+		padding: 10px 20px;
+	}
+	
+	.logo {
+		display: flex;
+		align-items: center;
+		/* Alinhar verticalmente os elementos dentro da .logo */
+	}
+	
+	.logo img {
+		max-width: 100px;
+	}
+	
+	.logo h1 {
+		font-size: 48px;
+		color: white;
+		margin-left: 10px;
+	}
+	
+	nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	nav ul li {
+		display: inline;
+		margin-right: 20px;
+	}
+	
+	nav a {
+		color: white;
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		/* Alterado para cursor de ponteiro */
+	}
+	
+	.search input[type="text"] {
+		padding: 5px;
+		border: none;
+		border-radius: 5px;
+	}
+	/* Estilo padrão para os links de navegação */
+	
+	nav a {
+		border-radius: 1000px;
+		padding: 10px 5px;
+		color: #ffffff;
+		display: inline-block;
+		font: normal bold 14px/1 "Open Sans", sans-serif;
+		text-align: center;
+		text-shadow: 1px 1px #000000;
+		transition: background-color 0.3s;
+	}
+	/* Estilo de hover para os links de navegação */
+	
+	nav a:hover {
+		background-color: #0056b3;
+	}
+	/* Estilos para o banner principal */
+	
+	.banner {
+		position: relative;
+		text-align: center;
+	}
+	
+	.banner img {
+		width: 100%;
+		max-height: 500px;
+		object-fit: cover;
+	}
+	
+	.banner-text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: rgba(0, 0, 0, 0.7);
+		padding: 20px;
+		border-radius: 10px;
+		color: white;
+	}
+	
+	.banner-text h1 {
+		font-size: 2em;
+	}
+	
+	.banner-text p {
+		font-size: 1.2em;
+	}
+	
+	.cta-button {
+		display: inline-block;
+		background-color: #009688;
+		color: white;
+		padding: 10px 20px;
+		text-decoration: none;
+		font-weight: bold;
+		border-radius: 5px;
+		margin-top: 20px;
+	}
+	
+	.cta-button:hover {
+		background-color: #007B75;
+	}
+	/* Estilos para o botão de fechar */
+	
+	.fechar-button {
+		display: none;
+		/* Inicialmente oculto */
+		background-color: #FF0000;
+		color: white;
+		padding: 5px 10px;
+		text-decoration: none;
+		font-weight: bold;
+		border-radius: 5px;
+		margin-top: 20px;
+		cursor: pointer;
+	}
+	/* Estilos para o conteúdo das seções */
+	
+	.section-content {
+		display: none;
+		/* Inicialmente oculto */
+		padding: 20px;
+	}
+	
+	iframe {
+		width: 100%;
+		height: 1000px;
+		border: none;
+		margin-bottom: 0;
+		/* Isso remove a margem inferior */
+	}
+	/* Estilos para o rodapé */
+	
+	.footer {
+		position: center;
+		text-align: center;
+		font-size: 14px;
+		color: #666;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+	
+	.footer-links ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.footer-links ul li {
+		display: inline;
+		margin-right: 20px;
+	}
+	/* Estilos para responsividade (mídia móvel) */
+	
+	@media screen and (max-width: 768px) {
+		header {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+		nav {
+			margin-top: 10px;
+		}
+		nav ul li {
+			display: block;
+			margin-bottom: 10px;
+		}
+		.search {
+			margin-top: 10px;
+		}
+	}
+	
+	#desempenho-btn img,
+	#capitacao-btn img,
+	#extras-btn img {
+		display: block;
+		margin: 0 auto 5px auto;
+	}
+	
+	.sub-menu {
+		display: none;
+		position: absolute;
+		z-index: 1;
+		background-color: #fff;
+		/* Cor de fundo da lista */
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		/* Sombra */
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		top: 100%;
+		/* Adicionado para posicionar abaixo do botão pai */
+		left: 0;
+		/* Centralizar o submenu */
+	}
+	
+	#desempenho-menu,
+	#capitacao-menu,
+	#extras-menu {
+		position: relative;
+	}
+	
+	#desempenho-menu:hover .sub-menu,
+	#capitacao-menu:hover .sub-menu,
+	#extras-menu:hover .sub-menu {
+		display: block;
+		background-color: #315b97;
+	}
+	
+	.sub-menu li {
+		display: block;
+		margin: 0;
+		padding: 10px;
+	}
+	
+	.sub-menu a {
+		color: #000;
+		/* Cor do texto nos submenus */
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+	}
+	
+	.sub-menu a img {
+		margin-right: 10px;
+	}
+	
+	#desempenho-menu:hover .sub-menu a,
+	#capitacao-menu:hover .sub-menu a,
+	#extras-menu:hover .sub-menu a {
+		color: white;
+	}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div class="logo"> <img src="logo.png">
+			<h1>Previne Marília</h1>
+			<!-- Título adicionado -->
+		</div>
+		<nav>
+			<ul>
+				<li>
+					<a href="inicial.html" target="iframe" id="pagina-inicial-link"> <img src="home.png">
+						<br> Home </a>
+				</li>
+				<li id="desempenho-menu">
+					<a href="#" id="desempenho-btn"> <img src="desempenho.png" alt="Desempenho"> Desempenho </a>
+					<ul id="desempenho-list" class="sub-menu">
+						<li>
+							<a href="monitoramarilia.html" target="iframe"> <img src="popv.png" alt="Vinculação"> Vinculação </a>
+						</li>
+						<li>
+							<a href="naocontabilizados.html" target="iframe"> <img src="condp.png" alt="Pendentes"> Pendentes </a>
+						</li>
+						<li>
+							<a href="acomp.html" target="iframe"> <img src="acomp.png" alt="Acomp. Diário"> Acomp. Diário </a>
+						</li>
+					</ul>
+				</li>
+			<!--<li id="capitacao-menu">
+							<a href="#" id="capitacao-btn"> <img src="img/capitacao.png" alt="Capitação"> Capitação </a>
+							<ul id="capitacao-list" class="sub-menu">
+								<li>
+									<a href="individual.html" target="iframe"> <img src="individual.png" alt="Cad. Individual"> Cad. Individual </a>
+								</li>
+								<li>
+									<a href="domiciliar.html" target="iframe"> <img src="domiciliar.png" alt="Cad. Domiciliar"> Cad. Domiciliar </a>
+								</li>
+								<li>
+									<a href="incons.html" target="iframe"> <img src="inconsistencias.png" alt="Inconsistências"> Inconsistências </a>
+								</li>
+								<li>
+									<a href="obitos.html" target="iframe"> <img src="obitos.png" alt="Óbitos"> Óbitos </a>
+								</li>
+							</ul>
+						</li>-->
+				<li id="extras-menu">
+					<a href="#" id="extras-btn"> <img src="extras.png" alt="Extras"> Extras </a>
+					<ul id="extras-list" class="sub-menu">
+						<li>
+							<a href="gesta.html" target="iframe"> <img src="gesta.png" alt="Encerrar Gestação"> Encerrar Gestação </a>
+						</li>
+						<li>
+							<a href="delta.html" target="iframe"> <img src="delta.png" alt="Delta previne"> Delta previne </a>
+						</li>
+						<li>
+							<a href="cid10.html" target="iframe"> <img src="cid10.png" alt="CID-10"> CID-10 </a>
+						</li>
+						<li>
+							<a href="limites.html" target="iframe"> <img src="limites.png" alt="Limites"> Limites </a>
+						</li>
+						<li>
+							<a href="material.html" target="iframe"> <img src="material.png" alt="Material de Apoio"> Material de Apoio </a>
+						</li>
+						<li>
+							<a href="contato.html" target="iframe"> <img src="contato.png" alt="Contato"> Contato </a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="banner" id="banner">
+		<div class="banner-text">
+			<h1 style="color: red; font-weight: bold;">ATENÇÃO</h1>
+			<p>Já estão disponíveis os dados referentes ao Q1/2024.</p> <a href="apoiadoras.html" id="saiba-mais-button" class="cta-button" onclick="abrirEmNovaGuia(event);">Minha Apoiadora</a>
+			<button class="fechar-button" onclick="fecharBanner();">Fechar</button>
+		</div>
+	</section>
+	<!-- iframe para exibir o conteúdo dos links -->
+	<iframe name="iframe" id="iframe"></iframe>
+	<script>
+	// Função para abrir o site redirecionado em uma nova guia
+	function abrirEmNovaGuia(event) {
+		event.preventDefault();
+		var url = document.getElementById("saiba-mais-button").href;
+		window.open(url, "iframe");
+	}
+	// Função para fechar o banner
+	function fecharBanner() {
+		var banner = document.getElementById("banner");
+		banner.style.display = "none";
+	}
+	// Exibir o botão "Fechar" após um breve atraso
+	setTimeout(function() {
+		var fecharButton = document.querySelector(".fechar-button");
+		fecharButton.style.display = "block";
+	}, 1000); // 1000ms = 1 segundo (ajuste conforme necessário)
+	// Função para carregar a página "inicial.html" automaticamente
+	function carregarPaginaInicial() {
+		var iframe = document.getElementById("iframe");
+		var paginaInicialLink = document.getElementById("pagina-inicial-link");
+		// Verifica se o iframe e o link existem
+		if(iframe && paginaInicialLink) {
+			iframe.src = paginaInicialLink.href;
+		}
+	}
+	// Chama a função para carregar a página inicial automaticamente quando a página carregar
+	window.onload = carregarPaginaInicial;
+	</script>
+	<div class="footer">
+		<p>&copy; 2023 Núcleo de Informações - SMS Marília.</p>
+	</div>
+</body>
+
+</html>
