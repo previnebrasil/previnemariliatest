@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acompanhamento Diário</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        #menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        #menu button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #content {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 60px);
+            text-align: center;
+            background-color: #fff; /* Fundo branco */
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Estilo para a legenda de cores */
+        .legend {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .legend span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        /* Cores */
+        .legend .red { background-color: red; }
+        .legend .yellow { background-color: yellow; }
+        .legend .green { background-color: green; }
+        .legend .blue { background-color: blue; }
+
+        /* Estilo para o botão de ajuda */
+        #help-button {
+            position: absolute;
+            top: 10px;
+            left: 10px; /* Alterado para alinhar à esquerda */
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Estilo para o pop-up */
+        .popup {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            z-index: 9999;
+            width: 400px;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popup-title {
+            font-size: 20px;
+        }
+
+        .popup-button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <button onclick="loadPage('hiperdia.html')">HIPERDIA</button>
+        <button onclick="loadPage('ppn.html')">Citopatológico</button>
+    </div>
+    <div id="content">
+        <iframe id="iframe" src="" frameborder="0"></iframe>
+        <button id="help-button" onclick="showPopup()">Legenda e Orientações</button> <!-- Botão de ajuda -->
+    </div>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-header">
+            <div class="popup-title">Legenda e Orientações</div>
+            <button class="popup-button" onclick="closePopup()">X</button>
+        </div>
+        <div class="popup-content">
+            <p class="justified-text">Os valores das metas nas tabelas são referentes aos atendimentos necessários para atingir cada indicador e não se referem à população total da unidade. É necessário atingir 100% da meta para alcançar a nota mínima de cada indicador.</p>
+            <div class="legend">
+                <span class="red"></span> 0% - 39,99%<br>
+                <span class="yellow"></span> 40% - 79,99%<br>
+                <span class="green"></span> 80% - 99,99%<br>
+                <span class="blue"></span> 100%
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadPage(url) {
+            document.getElementById('iframe').src = url;
+        }
+
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            if (popup.style.display === 'block') {
+                popup.style.display = 'none';
+            } else {
+                popup.style.display = 'block';
+            }
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

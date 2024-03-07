@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de CIDs</title>
+    <style>
+        /* Estilos */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 700px; /* Aumentando o tamanho do contêiner */
+            margin: 20px auto;
+            padding: 20px 30px 100px; /* Adicionando preenchimento inferior */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Adicionando posição relativa para botão absoluto */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px); /* Ajustando largura do input */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            float: left; /* Ajustando posição do input */
+        }
+        #btnPrevine {
+            position: absolute; /* Posicionamento absoluto */
+            top: 10px; /* Ajustando posição vertical */
+            right: 10px; /* Ajustando posição horizontal */
+            padding: 5px 10px; /* Ajustando tamanho do botão */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #btnPrevine:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        /* Estilo para células da coluna de Código */
+        td:nth-child(1) {
+            font-weight: bold;
+        }
+        /* Estilo para células da coluna cid_previne com valor "SIM" */
+        td[data-cid-previne="SIM"] {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buscador de CIDs</h1>
+        <input type="text" id="searchInput" placeholder="Digite o nome ou código CID">
+        <button id="btnPrevine">Previne Brasil</button>
+        <div id="results"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.3/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var input = this.value.toLowerCase();
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            fetch('cid10.xlsx')
+            .then(response => response.arrayBuffer())
+            .then(buffer => {
+                var data = new Uint8Array(buffer);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+                var jsonData = XLSX.utils.sheet_to_json(sheet);
+
+                var filteredData = jsonData.filter(function(item) {
+                    var codigo = item['nu_cid10'].toLowerCase().replace('.', '');
+                    var nome = item['no_cid10'].toLowerCase();
+                    return codigo.includes(input) || nome.includes(input);
+                });
+
+                // Ordenando os dados filtrados por nu_cid10
+                filteredData.sort((a, b) => {
+                    return a['nu_cid10'].localeCompare(b['nu_cid10']);
+                });
+
+                if (filteredData.length > 0) {
+                    var table = '<table><tr><th>Código</th><th>Nome</th><th>Sexo</th><th>Previne</th></tr>';
+                    filteredData.forEach(function(item) {
+                        var cidPrevine = item['cid_previne'] ? item['cid_previne'].toUpperCase() : '';
+                        table += '<tr><td>' + item['nu_cid10'] + '</td><td>' + item['no_cid10'] + '</td><td>' + item['no_sexo'] + '</td><td data-cid-previne="' + cidPrevine + '">' + cidPrevine + '</td></tr>';
+                    });
+                    table += '</table>';
+                    resultsDiv.innerHTML = table;
+                } else {
+                    resultsDiv.innerHTML = '<p>Nenhum resultado encontrado</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao ler a planilha:', error);
+            });
+        });
+
+        // Adicionando funcionalidade ao botão Previne Brasil
+        document.getElementById('btnPrevine').addEventListener('click', function() {
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            fetch('cid10.xlsx')
+            .then(response => response.arrayBuffer())
+            .then(buffer => {
+                var data = new Uint8Array(buffer);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+                var jsonData = XLSX.utils.sheet_to_json(sheet);
+
+                var previneData = jsonData.filter(function(item) {
+                    return item['cid_previne'] && item['cid_previne'].toUpperCase() === 'SIM';
+                });
+
+                // Ordenando os dados filtrados por nu_cid10
+                previneData.sort((a, b) => {
+                    return a['nu_cid10'].localeCompare(b['nu_cid10']);
+                });
+
+                if (previneData.length > 0) {
+                    var table = '<table><tr><th>Código</th><th>Nome</th><th>Sexo</th><th>Previne</th></tr>';
+                    previneData.forEach(function(item) {
+                        var cidPrevine = item['cid_previne'] ? item['cid_previne'].toUpperCase() : '';
+                        table += '<tr><td>' + item['nu_cid10'] + '</td><td>' + item['no_cid10'] + '</td><td>' + item['no_sexo'] + '</td><td data-cid-previne="' + cidPrevine + '">' + cidPrevine + '</td></tr>';
+                    });
+                    table += '</table>';
+                    resultsDiv.innerHTML = table;
+                } else {
+                    resultsDiv.innerHTML = '<p>Nenhum CID que previne encontrado</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao ler a planilha:', error);
+            });
+        });
+    </script>
+</body>
+</html>

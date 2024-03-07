@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contatos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .contatos {
+            column-count: 2; /* Define duas colunas */
+        }
+
+        .contato {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            break-inside: avoid; /* Evita que um contato seja dividido entre as colunas */
+        }
+
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 5px; /* Espaço entre os campos e informações */
+        }
+
+        label {
+            font-weight: bold;
+            flex: 0 0 20%; /* Largura fixa para os rótulos */
+            margin-right: 5px; /* Espaço entre os rótulos e as informações */
+        }
+
+        .info span {
+            flex: 1; /* Ocupa o restante da largura disponível */
+        }
+    </style>
+</head>
+<body>
+    <h1>Contatos</h1>
+    
+    <div class="contatos"> <!-- Envolve todos os contatos em uma div de duas colunas -->
+        <div class="contato">
+            <div class="info">
+                <label for="nome1">Nome:</label>
+                <span>Equipe de Apoio</span>
+            </div>
+            <div class="info">
+                <label for="telefone1">Telefone:</label>
+                <span>(14) 3402-6500</span>
+            </div>
+            <div class="info">
+                <label for="ramal1">Ramal:</label>
+                <span>6621</span>
+            </div>
+        </div>
+
+    <div class="contato">
+        <div class="info">
+            <label for="nome1">Nome:</label>
+            <span>Equipe Técnica - Saúde da Mulher</span>
+        </div>
+        <div class="info">
+            <label for="telefone1">Telefone:</label>
+            <span>(14) 3402-6500</span>
+        </div>
+        <div class="info">
+            <label for="ramal1">Ramal:</label>
+            <span>6560</span>
+        </div>
+    </div>
+
+    <div class="contato">
+        <div class="info">
+            <label for="nome1">Nome:</label>
+            <span>Equipe Técnica - Saúde do Adulto</span>
+        </div>
+        <div class="info">
+            <label for="telefone1">Telefone:</label>
+            <span>(14) 3402-6500</span>
+        </div>
+        <div class="info">
+            <label for="ramal1">Ramal:</label>
+            <span>6655</span>
+        </div>
+    </div>
+
+    <div class="contato">
+        <div class="info">
+            <label for="nome1">Nome:</label>
+            <span>Equipe Técnica - Saúde Mental</span>
+        </div>
+        <div class="info">
+            <label for="telefone1">Telefone:</label>
+            <span>(14) 3402-6500</span>
+        </div>
+        <div class="info">
+            <label for="ramal1">Ramal:</label>
+            <span>6526</span>
+        </div>
+    </div>
+
+    <div class="contato">
+        <div class="info">
+            <label for="nome1">Nome:</label>
+            <span>Equipe Técnica - Saúde Bucal</span>
+        </div>
+        <div class="info">
+            <label for="telefone1">Telefone:</label>
+            <span>(14) 3402-6500</span>
+        </div>
+        <div class="info">
+            <label for="ramal1">Ramal:</label>
+            <span>6562 ou 6513</span>
+        </div>
+    </div>
+
+    <div class="contato">
+        <div class="info">
+            <label for="nome1">Nome:</label>
+            <span>Equipe Técnica - Saúde da Criança</span>
+        </div>
+        <div class="info">
+            <label for="telefone1">Telefone:</label>
+            <span>(14) 3402-6500</span>
+        </div>
+        <div class="info">
+            <label for="ramal1">Ramal:</label>
+            <span>6546</span>
+        </div>
+    </div>
+
+    <div class="contato">
+        <div class="info">
+            <label for="nome1">Nome:</label>
+            <span>Núcleo de Informações</span>
+        </div>
+        <div class="info">
+            <label for="telefone1">Telefone:</label>
+            <span>(14) 3402-6500</span>
+        </div>
+        <div class="info">
+            <label for="ramal1">Ramal:</label>
+            <span>6536</span>
+        </div>
+    </div>
+
+</body>
+</html>
+
+</body>
+</html>

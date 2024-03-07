@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: Arial, sans-serif;
+  	    font-size: 30px;
+ 	    font-weight: bold;
+ 	    margin-bottom: 20px;
+ 	    background: linear-gradient(90deg, #003A70, #001529);
+            color: #333333;
+  	    -webkit-background-clip: text;
+  	    -webkit-text-fill-color: transparent;
+  	    text-align: center;
+	}
+
+        select {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        #resultado {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #resultado img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <title>Buscador de Unidades de Saúde</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Minha Apoiadora</h1>
+        <select id="unidades" onchange="buscarApoiador()">
+            <option value="">Selecione uma unidade</option>
+            <option value="UBS ALTO CAFEZAL">UBS ALTO CAFEZAL</option>
+    <option value="UBS CASCATA">UBS CASCATA</option>
+    <option value="UBS CASTELO BRANCO">UBS CASTELO BRANCO</option>
+    <option value="UBS CHICO MENDES">UBS CHICO MENDES</option>
+    <option value="UBS NOVA MARILIA">UBS NOVA MARILIA</option>
+    <option value="UBS PLANALTO">UBS PLANALTO</option>
+    <option value="UBS SANTA ANTONIETA">UBS SANTA ANTONIETA</option>
+    <option value="UBS SAO JUDAS">UBS SAO JUDAS</option>
+    <option value="USF AEROPORTO">USF AEROPORTO</option>
+    <option value="USF ALTANEIRA">USF ALTANEIRA</option>
+    <option value="USF ANIZ BADRA">USF ANIZ BADRA</option>
+    <option value="USF ARGOLO FERAO">USF ARGOLO FERAO</option>
+    <option value="USF AVENCAS AMADEU AMARAL">USF AVENCAS AMADEU AMARAL</option>
+    <option value="USF BANDEIRANTES">USF BANDEIRANTES</option>
+    <option value="USF CAMPO BELO">USF CAMPO BELO</option>
+    <option value="USF CDHU">USF CDHU</option>
+    <option value="USF COSTA E SILVA">USF COSTA E SILVA</option>
+    <option value="USF FIGUEIRINHA">USF FIGUEIRINHA</option>
+    <option value="USF JANIO QUADROS">USF JANIO QUADROS</option>
+    <option value="USF JARDIM AMERICA IV">USF JARDIM AMERICA IV</option>
+    <option value="USF JARDIM CAVALARI">USF JARDIM CAVALARI</option>
+    <option value="USF JARDIM FLAMINGO">USF JARDIM FLAMINGO</option>
+    <option value="USF JARDIM MARACA">USF JARDIM MARACA</option>
+    <option value="USF JARDIM MARILIA">USF JARDIM MARILIA</option>
+    <option value="USF JARDIM RENATA">USF JARDIM RENATA</option>
+    <option value="USF JARDIM TERUEL">USF JARDIM TERUEL</option>
+    <option value="USF JK">USF JK</option>
+    <option value="USF JOQUEY CLUBE">USF JOQUEY CLUBE</option>
+    <option value="USF JULIETA">USF JULIETA</option>
+    <option value="USF LACIO">USF LACIO</option>
+    <option value="USF LILIANA">USF LILIANA</option>
+    <option value="USF MARAJO">USF MARAJO</option>
+    <option value="USF NOVO HORIZONTE">USF NOVO HORIZONTE</option>
+    <option value="USF PADRE NOBREGA">USF PADRE NOBREGA</option>
+    <option value="USF PADRE NOBREGA II">USF PADRE NOBREGA II</option>
+    <option value="USF PALMITAL">USF PALMITAL</option>
+    <option value="USF PARQUE DAS NACOES">USF PARQUE DAS NACOES</option>
+    <option value="USF PARQUE DOS IPES">USF PARQUE DOS IPES</option>
+    <option value="USF PRIMEIRO DE MAIO">USF PRIMEIRO DE MAIO</option>
+    <option value="USF ROSALIA">USF ROSALIA</option>
+    <option value="USF SANTA ANTONIETA II">USF SANTA ANTONIETA II</option>
+    <option value="USF SANTA ANTONIETA III">USF SANTA ANTONIETA III</option>
+    <option value="USF SANTA AUGUSTA">USF SANTA AUGUSTA</option>
+    <option value="USF SANTA PAULA">USF SANTA PAULA</option>
+    <option value="USF SAO MIGUEL">USF SAO MIGUEL</option>
+    <option value="USF TOFOLI">USF TOFOLI</option>
+    <option value="USF TRES LAGOS">USF TRES LAGOS</option>
+    <option value="USF VIDA NOVA MARACA">USF VIDA NOVA MARACA</option>
+    <option value="USF VILA BARROS">USF VILA BARROS</option>
+    <option value="USF VILA HIPICA">USF VILA HIPICA</option>
+    <option value="USF VILA NOVA">USF VILA NOVA</option>
+    <option value="USF VILA REAL">USF VILA REAL</option>
+        </select>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        // Mapeie as informações de cada unidade aqui
+        const unidadesData = {
+     "UBS ALTO CAFEZAL": {
+        nomeUnidade: "UBS ALTO CAFEZAL",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500", 
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "UBS CASCATA": {
+        nomeUnidade: "UBS CASCATA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=222222222"
+    },
+    "UBS CASTELO BRANCO": {
+        nomeUnidade: "UBS CASTELO BRANCO",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=333333333"
+    },
+    "UBS CHICO MENDES": {
+        nomeUnidade: "UBS CHICO MENDES",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "UBS NOVA MARILIA": {
+        nomeUnidade: "UBS NOVA MARILIA",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=555555555"
+    },
+    "UBS PLANALTO": {
+        nomeUnidade: "UBS PLANALTO",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=666666666"
+    },
+    "UBS SANTA ANTONIETA": {
+        nomeUnidade: "UBS SANTA ANTONIETA",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "UBS SAO JUDAS": {
+        nomeUnidade: "UBS SAO JUDAS",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=888888888"
+    },
+    "USF AEROPORTO": {
+        nomeUnidade: "USF AEROPORTO",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=999999999"
+    },
+    "USF ALTANEIRA": {
+        nomeUnidade: "USF ALTANEIRA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1010101010"
+    },
+    "USF ANIZ BADRA": {
+        nomeUnidade: "USF ANIZ BADRA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1111111111"
+    },
+    "USF ARGOLO FERAO": {
+        nomeUnidade: "USF ARGOLO FERAO",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF AVENCAS AMADEU AMARAL": {
+        nomeUnidade: "USF AVENCAS AMADEU AMARAL",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF BANDEIRANTES": {
+        nomeUnidade: "USF BANDEIRANTES",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF CAMPO BELO": {
+        nomeUnidade: "USF CAMPO BELO",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1515151515"
+    },
+    "USF CDHU": {
+        nomeUnidade: "USF CDHU",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1616161616"
+    },
+    "USF COSTA E SILVA": {
+        nomeUnidade: "USF COSTA E SILVA",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1717171717"
+    },
+    "USF FIGUEIRINHA": {
+        nomeUnidade: "USF FIGUEIRINHA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1818181818"
+    },
+    "USF JANIO QUADROS": {
+        nomeUnidade: "USF JANIO QUADROS",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=1919191919"
+    },
+    "USF JARDIM AMERICA IV": {
+        nomeUnidade: "USF JARDIM AMERICA IV",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF JARDIM CAVALARI": {
+        nomeUnidade: "USF JARDIM CAVALARI",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF JARDIM FLAMINGO": {
+        nomeUnidade: "USF JARDIM FLAMINGO",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=2222222222"
+    },
+    "USF JARDIM MARACA": {
+        nomeUnidade: "USF JARDIM MARACA",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF JARDIM MARILIA": {
+        nomeUnidade: "USF JARDIM MARILIA",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF JARDIM RENATA": {
+        nomeUnidade: "USF JARDIM RENATA",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF JARDIM TERUEL": {
+        nomeUnidade: "USF JARDIM TERUEL",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF JK": {
+        nomeUnidade: "USF JK",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=2727272727"
+    },
+    "USF JOQUEY CLUBE": {
+        nomeUnidade: "USF JOQUEY CLUBE",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=2828282828"
+    },
+    "USF JULIETA": {
+        nomeUnidade: "USF JULIETA",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF LACIO": {
+        nomeUnidade: "USF LACIO",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=3030303030"
+    },
+    "USF LILIANA": {
+        nomeUnidade: "USF LILIANA",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF MARAJO": {
+        nomeUnidade: "USF MARAJO",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=3232323232"
+    },
+    "USF NOVO HORIZONTE": {
+        nomeUnidade: "USF NOVO HORIZONTE",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=3333333333"
+    },
+    "USF PADRE NOBREGA": {
+        nomeUnidade: "USF PADRE NOBREGA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=3434343434"
+    },
+    "USF PADRE NOBREGA II": {
+        nomeUnidade: "USF PADRE NOBREGA II",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=4141414141"
+    },
+    "USF PALMITAL": {
+        nomeUnidade: "USF PALMITAL",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=4242424242"
+    },
+    "USF PARQUE DAS NACOES": {
+        nomeUnidade: "USF PARQUE DAS NACOES",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF PARQUE DOS IPES": {
+        nomeUnidade: "USF PARQUE DOS IPES",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=4444444444"
+    },
+    "USF PRIMEIRO DE MAIO": {
+        nomeUnidade: "USF PRIMEIRO DE MAIO",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=4545454545"
+    },
+    "USF ROSALIA": {
+        nomeUnidade: "USF ROSALIA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=4646464646"
+    },
+    "USF SANTA ANTONIETA II": {
+        nomeUnidade: "USF SANTA ANTONIETA II",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF SANTA ANTONIETA III": {
+        nomeUnidade: "USF SANTA ANTONIETA III",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF SANTA AUGUSTA": {
+        nomeUnidade: "USF SANTA AUGUSTA",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=4949494949"
+    },
+    "USF SANTA PAULA": {
+        nomeUnidade: "USF SANTA PAULA",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5050505050"
+    },
+    "USF SAO MIGUEL": {
+        nomeUnidade: "USF SAO MIGUEL",
+        nomeApoiador: "Carina",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=14997229016"
+    },
+    "USF TOFOLI": {
+        nomeUnidade: "USF TOFOLI",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5252525252"
+    },
+    "USF TRES LAGOS": {
+        nomeUnidade: "USF TRES LAGOS",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5353535353"
+    },
+    "USF VIDA NOVA MARACA": {
+        nomeUnidade: "USF VIDA NOVA MARACA",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5454545454"
+    },
+    "USF VILA BARROS": {
+        nomeUnidade: "USF VILA BARROS",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5555555555"
+    },
+    "USF VILA HIPICA": {
+        nomeUnidade: "USF VILA HIPICA",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5656565656"
+    },
+    "USF VILA NOVA": {
+        nomeUnidade: "USF VILA NOVA",
+        nomeApoiador: "Thais",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5757575757"
+    },
+    "USF VILA REAL": {
+        nomeUnidade: "USF VILA REAL",
+        nomeApoiador: "Cristiane",
+        telefoneApoiador: "(14) 3402-6500",
+        whatsappApoiador: "https://api.whatsapp.com/send?phone=5858585858"
+    }
+        };
+
+        function buscarApoiador() {
+            var select = document.getElementById('unidades');
+            var selectedValue = select.options[select.selectedIndex].value;
+            var resultadoDiv = document.getElementById('resultado');
+
+            if (selectedValue) {
+                var data = unidadesData[selectedValue];
+                resultadoDiv.innerHTML = `
+                     <h2>${data.nomeUnidade}</h2>
+                     <p><strong>Apoiadora: </strong>${data.nomeApoiador}</p>
+                     <p><strong>Telefone: </strong>${data.telefoneApoiador} 
+                         <a href="${data.whatsappApoiador}" target="_blank"><img src="whats.png" alt="WhatsApp"></a>
+                     </p>
+            `;
+            } else {
+                resultadoDiv.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
